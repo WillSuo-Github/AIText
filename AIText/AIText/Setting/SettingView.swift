@@ -29,6 +29,7 @@ struct SettingView: View {
 
 enum MenuItem: String, CaseIterable, Identifiable {
     case general = "General"
+    case quickAction = "Quick Action"
     case about = "About"
 
     var id: String { self.rawValue }
@@ -40,6 +41,8 @@ enum MenuItem: String, CaseIterable, Identifiable {
             GeneralSettingView()
         case .about:
             AboutSettingView()
+        case .quickAction:
+            QuickActionSettingView()
         }
     }
 }

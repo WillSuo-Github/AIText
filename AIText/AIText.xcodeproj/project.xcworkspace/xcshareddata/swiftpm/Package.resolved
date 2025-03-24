@@ -1,13 +1,22 @@
 {
-  "originHash" : "cbfac23704056ebede6461a95b32b4e6e7ccb084aa5cddb44b772ed35e75777c",
+  "originHash" : "588027d2a43c2cb78742bde899da9282e5255d8a0408b93a292626bbe86ab7d8",
   "pins" : [
     {
-      "identity" : "keyboardshortcuts",
+      "identity" : "keyholder",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/sindresorhus/KeyboardShortcuts",
+      "location" : "https://github.com/Clipy/KeyHolder",
       "state" : {
-        "revision" : "045cf174010beb335fa1d2567d18c057b8787165",
-        "version" : "2.3.0"
+        "branch" : "master",
+        "revision" : "6b3f7d5ee1a8cf79f3f1ba6f03d14fddff6478ee"
+      }
+    },
+    {
+      "identity" : "magnet",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Clipy/Magnet",
+      "state" : {
+        "revision" : "26d672a031fd33eac94887b4e19aca0ab4761f45",
+        "version" : "3.4.0"
       }
     },
     {
@@ -17,6 +26,15 @@
       "state" : {
         "revision" : "1a7a5bae571b5ff096c8b2c1062577248214f52e",
         "version" : "0.3.7"
+      }
+    },
+    {
+      "identity" : "sauce",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Clipy/Sauce",
+      "state" : {
+        "revision" : "df657bc1beba23ffd580953f183cd756b5bcd514",
+        "version" : "2.4.1"
       }
     },
     {

@@ -8,6 +8,8 @@
 import Foundation
 import SwiftUI
 import SnapKit
+import KeyHolder
+import Magnet
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     var statusItem: NSStatusItem!
@@ -19,7 +21,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             backing: .buffered,
             defer: false
         )
-        result.contentView = NSHostingView(rootView: SettingView())
+        result.delegate = self
+        result.contentView = NSHostingView(rootView: SettingView().modelContainer(sharedModelContainer))
         result.isReleasedWhenClosed = false
         return result
     }()
@@ -83,5 +86,47 @@ extension AppDelegate {
     
     @objc func quitApp() {
         NSApp.terminate(nil)
+    }
+}
+
+// MARK: - NSWindowDelegate
+extension AppDelegate: NSWindowDelegate {
+    func windowWillClose(_ notification: Notification) {
+        NSApp.deactivate()
+    }
+    
+    func windowDidBecomeKey(_ notification: Notification) {
+        print("窗口已激活")
+    }
+    
+    func windowDidResignKey(_ notification: Notification) {
+        print("窗口已失去焦点")
+    }
+}
+
+//
+extension AppDelegate: RecordViewDelegate {
+    func recordViewShouldBeginRecording(_ recordView: KeyHolder.RecordView) -> Bool {
+        return true
+    }
+    
+    func recordView(_ recordView: KeyHolder.RecordView, canRecordKeyCombo keyCombo: Magnet.KeyCombo) -> Bool {
+        return true
+    }
+    
+    func recordView(_ recordView: KeyHolder.RecordView, didChangeKeyCombo keyCombo: Magnet.KeyCombo?) {
+        print("key combo changed")
+    }
+    
+    func recordViewDidEndRecording(_ recordView: KeyHolder.RecordView) {
+        print("end recording")
+    }
+    
+    func recordViewDidClear(_ recordView: RecordView) {
+        print("record view did clear")
+    }
+    
+    func recordViewDidRecord(_ recordView: RecordView) {
+        print("record view did record")
     }
 }

@@ -10,9 +10,7 @@ import SwiftUI
 
 struct GeneralSettingView: View {
     var body: some View {
-        List {
-            SettingCardView()
-        }
+        Text("General Setting")
     }
 }
 

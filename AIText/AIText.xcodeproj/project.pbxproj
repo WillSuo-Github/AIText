@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		342C7E352D902D2F000054B3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 342C7E342D902D2F000054B3 /* SnapKit */; };
 		348F725C2D9162E5007DD506 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = 348F725B2D9162E5007DD506 /* OpenAI */; };
-		348F725F2D916322007DD506 /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = 348F725E2D916322007DD506 /* KeyboardShortcuts */; };
+		34DB22352D91955E00005E27 /* KeyHolder in Frameworks */ = {isa = PBXBuildFile; productRef = 34DB22342D91955E00005E27 /* KeyHolder */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +60,7 @@
 			files = (
 				348F725C2D9162E5007DD506 /* OpenAI in Frameworks */,
 				342C7E352D902D2F000054B3 /* SnapKit in Frameworks */,
-				348F725F2D916322007DD506 /* KeyboardShortcuts in Frameworks */,
+				34DB22352D91955E00005E27 /* KeyHolder in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,7 +123,7 @@
 			packageProductDependencies = (
 				342C7E342D902D2F000054B3 /* SnapKit */,
 				348F725B2D9162E5007DD506 /* OpenAI */,
-				348F725E2D916322007DD506 /* KeyboardShortcuts */,
+				34DB22342D91955E00005E27 /* KeyHolder */,
 			);
 			productName = AIText;
 			productReference = 342C7D822D902BFE000054B3 /* AIText.app */;
@@ -210,7 +210,7 @@
 			packageReferences = (
 				342C7E332D902D2F000054B3 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				348F725A2D9162E5007DD506 /* XCRemoteSwiftPackageReference "OpenAI" */,
-				348F725D2D916322007DD506 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
+				34DB22332D91955E00005E27 /* XCRemoteSwiftPackageReference "KeyHolder" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 342C7D832D902BFE000054B3 /* Products */;
@@ -424,7 +424,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ws.AIText;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -453,7 +453,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ws.AIText;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -588,12 +588,12 @@
 				minimumVersion = 0.3.7;
 			};
 		};
-		348F725D2D916322007DD506 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
+		34DB22332D91955E00005E27 /* XCRemoteSwiftPackageReference "KeyHolder" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sindresorhus/KeyboardShortcuts";
+			repositoryURL = "https://github.com/Clipy/KeyHolder";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.3.0;
+				branch = master;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -609,10 +609,10 @@
 			package = 348F725A2D9162E5007DD506 /* XCRemoteSwiftPackageReference "OpenAI" */;
 			productName = OpenAI;
 		};
-		348F725E2D916322007DD506 /* KeyboardShortcuts */ = {
+		34DB22342D91955E00005E27 /* KeyHolder */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 348F725D2D916322007DD506 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
-			productName = KeyboardShortcuts;
+			package = 34DB22332D91955E00005E27 /* XCRemoteSwiftPackageReference "KeyHolder" */;
+			productName = KeyHolder;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

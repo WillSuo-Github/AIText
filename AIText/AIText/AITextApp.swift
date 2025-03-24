@@ -15,6 +15,5 @@ struct AITextApp: App {
         Settings {
             SettingView()
         }
-
     }
 }
