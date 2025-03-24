@@ -1,6 +1,24 @@
 {
-  "originHash" : "4cdad746817ac9ed37e44dbe90a2ff25fc018954899b7d513e41a4bfc70f065a",
+  "originHash" : "cbfac23704056ebede6461a95b32b4e6e7ccb084aa5cddb44b772ed35e75777c",
   "pins" : [
+    {
+      "identity" : "keyboardshortcuts",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sindresorhus/KeyboardShortcuts",
+      "state" : {
+        "revision" : "045cf174010beb335fa1d2567d18c057b8787165",
+        "version" : "2.3.0"
+      }
+    },
+    {
+      "identity" : "openai",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/MacPaw/OpenAI",
+      "state" : {
+        "revision" : "1a7a5bae571b5ff096c8b2c1062577248214f52e",
+        "version" : "0.3.7"
+      }
+    },
     {
       "identity" : "snapkit",
       "kind" : "remoteSourceControl",

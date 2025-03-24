@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		342C7E352D902D2F000054B3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 342C7E342D902D2F000054B3 /* SnapKit */; };
+		348F725C2D9162E5007DD506 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = 348F725B2D9162E5007DD506 /* OpenAI */; };
+		348F725F2D916322007DD506 /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = 348F725E2D916322007DD506 /* KeyboardShortcuts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +58,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				348F725C2D9162E5007DD506 /* OpenAI in Frameworks */,
 				342C7E352D902D2F000054B3 /* SnapKit in Frameworks */,
+				348F725F2D916322007DD506 /* KeyboardShortcuts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +122,8 @@
 			name = AIText;
 			packageProductDependencies = (
 				342C7E342D902D2F000054B3 /* SnapKit */,
+				348F725B2D9162E5007DD506 /* OpenAI */,
+				348F725E2D916322007DD506 /* KeyboardShortcuts */,
 			);
 			productName = AIText;
 			productReference = 342C7D822D902BFE000054B3 /* AIText.app */;
@@ -203,6 +209,8 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				342C7E332D902D2F000054B3 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				348F725A2D9162E5007DD506 /* XCRemoteSwiftPackageReference "OpenAI" */,
+				348F725D2D916322007DD506 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 342C7D832D902BFE000054B3 /* Products */;
@@ -416,7 +424,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.6;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ws.AIText;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -445,7 +453,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.6;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ws.AIText;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -572,6 +580,22 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		348F725A2D9162E5007DD506 /* XCRemoteSwiftPackageReference "OpenAI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MacPaw/OpenAI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.7;
+			};
+		};
+		348F725D2D916322007DD506 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/KeyboardShortcuts";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -579,6 +603,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 342C7E332D902D2F000054B3 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		348F725B2D9162E5007DD506 /* OpenAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 348F725A2D9162E5007DD506 /* XCRemoteSwiftPackageReference "OpenAI" */;
+			productName = OpenAI;
+		};
+		348F725E2D916322007DD506 /* KeyboardShortcuts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 348F725D2D916322007DD506 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
+			productName = KeyboardShortcuts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

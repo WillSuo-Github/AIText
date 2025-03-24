@@ -15,10 +15,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private lazy var settingsWindow: NSWindow = {
         let result = NSWindow(
             contentRect: .init(origin: .zero, size: CGSize(width: 480, height: 300)),
-            styleMask: [.titled, .closable],
+            styleMask: [.titled, .closable, .resizable],
             backing: .buffered,
             defer: false
         )
+        result.contentView = NSHostingView(rootView: SettingView())
         result.isReleasedWhenClosed = false
         return result
     }()
@@ -74,7 +75,7 @@ extension AppDelegate: NSMenuDelegate {
 // MARK: - Actions
 extension AppDelegate {
     @objc func openPreferences() {
-        settingsWindow.contentView = NSHostingView(rootView: SettingView())
+        settingsWindow.setFrame(NSRect(x: 0, y: 0, width: 800, height: 600), display: true)
         settingsWindow.makeKeyAndOrderFront(nil)
         settingsWindow.center()
         NSApp.activate(ignoringOtherApps: true)
