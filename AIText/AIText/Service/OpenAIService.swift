@@ -11,7 +11,7 @@ import OpenAI
 final class OpenAIService {
     func run(quickItem: QuickItem) async throws -> String {
         print("get user selection text: \(SelectionManager.shared.getSelectedText())")
-        return ""
+//        return ""
         
         let prompt = quickItem.prompt
         guard let openAIKey = APIKeyManager.shared.getAPIKey(service: .openAI) else {
@@ -21,9 +21,10 @@ final class OpenAIService {
         let openAI = OpenAI(apiToken: openAIKey)
         let query = ChatQuery(messages: [
             .system(.init(content: prompt)),
-            .user(.init(content: .string("")))
+            .user(.init(content: .string(SelectionManager.shared.getSelectedText() ?? "")))
         ], model: .gpt4_o, n: 1)
         
+        sleep(20)
         let chatResult: ChatResult = try await openAI.chats(query: query)
         
         guard let result = chatResult.choices.first?.message.content else {

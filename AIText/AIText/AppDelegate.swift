@@ -45,6 +45,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         print("✅ AppDelegate 启动成功")
 
         QuickActionManager.shared.start()
+        MouseLoadingManager.shared.start()
         
         // 创建菜单栏图标
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)

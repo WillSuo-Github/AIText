@@ -13,6 +13,8 @@ final class AIAgency {
     private var openAIService = OpenAIService()
     
     func run(quickItem: QuickItem) async -> String {
+        NotificationCenter.default.post(name: .QuickActionStart, object: nil)
+        
         guard quickItem.prompt.isEmpty == false else {
             NotificationCenter.default.post(name: .QuickActionError, object: nil)
             return ""
@@ -20,8 +22,10 @@ final class AIAgency {
         
         do {
             let result = try await openAIService.run(quickItem: quickItem)
+            NotificationCenter.default.post(name: .QuickActionSuccess, object: nil)
             return result
         } catch {
+            print("Error: \(error)")
             NotificationCenter.default.post(name: .QuickActionError, object: nil)
             return ""
         }
