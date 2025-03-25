@@ -17,6 +17,7 @@ struct QuickActionSettingView: View {
         List {
             ForEach(quickItems) { quickItem in
                 SettingCardView(quickItem: quickItem)
+                        .listRowSeparator(.hidden)
             }
             
             Button {
@@ -24,6 +25,7 @@ struct QuickActionSettingView: View {
             } label: {
                 Text("Add")
             }
+            .listRowSeparator(.hidden)
         }
     }
     
