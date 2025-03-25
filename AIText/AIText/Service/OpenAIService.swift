@@ -10,6 +10,9 @@ import OpenAI
 
 final class OpenAIService {
     func run(quickItem: QuickItem) async throws -> String {
+        print("get user selection text: \(SelectionManager.shared.getSelectedText())")
+        return ""
+        
         let prompt = quickItem.prompt
         guard let openAIKey = APIKeyManager.shared.getAPIKey(service: .openAI) else {
             throw NSError(domain: "OpenAIService", code: 0, userInfo: [NSLocalizedDescriptionKey: "No OpenAI key"])

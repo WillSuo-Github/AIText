@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import KeyboardShortcuts
 
 struct QuickActionCardView: View {
     @State var quickItem: QuickItem

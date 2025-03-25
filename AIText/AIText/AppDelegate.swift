@@ -42,6 +42,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }()
     
     func applicationDidFinishLaunching(_ notification: Notification) {
+        print("✅ AppDelegate 启动成功")
+
         QuickActionManager.shared.start()
         
         // 创建菜单栏图标
@@ -101,32 +103,5 @@ extension AppDelegate: NSWindowDelegate {
     
     func windowDidResignKey(_ notification: Notification) {
         print("窗口已失去焦点")
-    }
-}
-
-//
-extension AppDelegate: RecordViewDelegate {
-    func recordViewShouldBeginRecording(_ recordView: KeyHolder.RecordView) -> Bool {
-        return true
-    }
-    
-    func recordView(_ recordView: KeyHolder.RecordView, canRecordKeyCombo keyCombo: Magnet.KeyCombo) -> Bool {
-        return true
-    }
-    
-    func recordView(_ recordView: KeyHolder.RecordView, didChangeKeyCombo keyCombo: Magnet.KeyCombo?) {
-        print("key combo changed")
-    }
-    
-    func recordViewDidEndRecording(_ recordView: KeyHolder.RecordView) {
-        print("end recording")
-    }
-    
-    func recordViewDidClear(_ recordView: RecordView) {
-        print("record view did clear")
-    }
-    
-    func recordViewDidRecord(_ recordView: RecordView) {
-        print("record view did record")
     }
 }

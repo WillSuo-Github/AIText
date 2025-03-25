@@ -19,12 +19,13 @@ struct RecordViewWrapper: NSViewRepresentable {
         result.tintColor = NSColor.controlAccentColor
         result.cornerRadius = 8
         result.clearButtonMode = .never
-        result.delegate = NSApplication.shared.delegate as? AppDelegate
+        result.delegate = QuickActionManager.shared
         result.didChange = { keyCombo in
             guard let keyCombo = keyCombo else {
                 return
             }
             self.keyComboData = try? JSONEncoder().encode(keyCombo)
+            NotificationCenter.default.post(name: .keyComboChanged, object: nil)
         }
         let clickGesture = NSClickGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handleClick(_:)))
         result.addGestureRecognizer(clickGesture)
@@ -33,12 +34,13 @@ struct RecordViewWrapper: NSViewRepresentable {
 
     func updateNSView(_ nsView: RecordView, context: Context) {
         print("record view update")
+        nsView.window?.makeFirstResponder(nil)
         let newKey = QuickItem.getKeyCombo(keyComboData)
         nsView.keyCombo = newKey
         if newKey == nil {
             nsView.clear()
         }
-        nsView.layoutSubtreeIfNeeded()
+//        nsView.layoutSubtreeIfNeeded()
     }
     
     func makeCoordinator() -> Coordinator {

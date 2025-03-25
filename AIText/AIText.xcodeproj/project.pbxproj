@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		342C7E352D902D2F000054B3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 342C7E342D902D2F000054B3 /* SnapKit */; };
+		348BEE722D92A9390049D682 /* KeyHolder in Frameworks */ = {isa = PBXBuildFile; productRef = 348BEE712D92A9390049D682 /* KeyHolder */; };
+		348BEE752D92AC190049D682 /* KeyHolder in Frameworks */ = {isa = PBXBuildFile; productRef = 348BEE742D92AC190049D682 /* KeyHolder */; };
 		348F725C2D9162E5007DD506 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = 348F725B2D9162E5007DD506 /* OpenAI */; };
-		34DB22352D91955E00005E27 /* KeyHolder in Frameworks */ = {isa = PBXBuildFile; productRef = 34DB22342D91955E00005E27 /* KeyHolder */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,9 +59,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				348BEE752D92AC190049D682 /* KeyHolder in Frameworks */,
 				348F725C2D9162E5007DD506 /* OpenAI in Frameworks */,
 				342C7E352D902D2F000054B3 /* SnapKit in Frameworks */,
-				34DB22352D91955E00005E27 /* KeyHolder in Frameworks */,
+				348BEE722D92A9390049D682 /* KeyHolder in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,7 +125,8 @@
 			packageProductDependencies = (
 				342C7E342D902D2F000054B3 /* SnapKit */,
 				348F725B2D9162E5007DD506 /* OpenAI */,
-				34DB22342D91955E00005E27 /* KeyHolder */,
+				348BEE712D92A9390049D682 /* KeyHolder */,
+				348BEE742D92AC190049D682 /* KeyHolder */,
 			);
 			productName = AIText;
 			productReference = 342C7D822D902BFE000054B3 /* AIText.app */;
@@ -210,7 +213,7 @@
 			packageReferences = (
 				342C7E332D902D2F000054B3 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				348F725A2D9162E5007DD506 /* XCRemoteSwiftPackageReference "OpenAI" */,
-				34DB22332D91955E00005E27 /* XCRemoteSwiftPackageReference "KeyHolder" */,
+				348BEE732D92AC190049D682 /* XCRemoteSwiftPackageReference "KeyHolder" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 342C7D832D902BFE000054B3 /* Products */;
@@ -419,6 +422,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSAppleEventsUsageDescription = "";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -448,6 +452,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSAppleEventsUsageDescription = "";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -580,20 +585,20 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		348BEE732D92AC190049D682 /* XCRemoteSwiftPackageReference "KeyHolder" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Clipy/KeyHolder";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		348F725A2D9162E5007DD506 /* XCRemoteSwiftPackageReference "OpenAI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MacPaw/OpenAI";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.3.7;
-			};
-		};
-		34DB22332D91955E00005E27 /* XCRemoteSwiftPackageReference "KeyHolder" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Clipy/KeyHolder";
-			requirement = {
-				branch = master;
-				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -604,15 +609,19 @@
 			package = 342C7E332D902D2F000054B3 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
+		348BEE712D92A9390049D682 /* KeyHolder */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KeyHolder;
+		};
+		348BEE742D92AC190049D682 /* KeyHolder */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 348BEE732D92AC190049D682 /* XCRemoteSwiftPackageReference "KeyHolder" */;
+			productName = KeyHolder;
+		};
 		348F725B2D9162E5007DD506 /* OpenAI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 348F725A2D9162E5007DD506 /* XCRemoteSwiftPackageReference "OpenAI" */;
 			productName = OpenAI;
-		};
-		34DB22342D91955E00005E27 /* KeyHolder */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 34DB22332D91955E00005E27 /* XCRemoteSwiftPackageReference "KeyHolder" */;
-			productName = KeyHolder;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

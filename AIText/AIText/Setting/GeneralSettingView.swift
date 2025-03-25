@@ -15,7 +15,7 @@ struct GeneralSettingView: View {
         List {
             Section {
                 ForEach(AIService.allCases, id: \.self) { service in
-                    ServiceCardView(aiService: service, selectedAIService: $selectedAIService)
+                    ServiceCardView(aiService: service, selectedAIService: $selectedAIService, apiKey: service.apiKey())
                 }
             } header: {
                 Text("Services")

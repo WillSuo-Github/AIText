@@ -21,4 +21,8 @@ enum AIService: String, CaseIterable {
         case .openAI: return "SK-*************************************************"
         }
     }
+    
+    func apiKey() -> String {
+        return APIKeyManager.shared.getAPIKey(service: self) ?? ""
+    }
 }

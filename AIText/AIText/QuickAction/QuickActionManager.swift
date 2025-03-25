@@ -10,7 +10,7 @@ import SwiftData
 import KeyHolder
 import Magnet
 
-final class QuickActionManager {
+final class QuickActionManager: NSObject {
     static let shared = QuickActionManager()
     
     @MainActor
@@ -31,6 +31,7 @@ final class QuickActionManager {
     
     @MainActor
     func refreshHotkeys() {
+        print("refresh hotkeys")
         HotKeyCenter.shared.unregisterAll()
         
         let descriptor = FetchDescriptor<QuickItem>(
@@ -45,6 +46,7 @@ final class QuickActionManager {
                                 target: self,
                                 action: #selector(hotkeyCalled(_:)))
             hotKey.register()
+            print("register hotkey, identifier: \(item.id.uuidString)")
         }
     }
 }
@@ -54,16 +56,42 @@ extension QuickActionManager {
     @MainActor
     @objc func hotkeyCalled(_ hotKey: HotKey) {
         let identifier = hotKey.identifier
-        let descriptor = FetchDescriptor<QuickItem>(predicate: #Predicate { $0.id.uuidString == identifier })
-        guard let quickItem = try? sharedModelContainer.mainContext.fetch(descriptor) else {
+        guard let uuid = UUID(uuidString: identifier) else {
+            print("hotkey called and identifier is invalid, identifier: \(identifier)")
+            return
+        }
+        let descriptor = FetchDescriptor<QuickItem>(predicate: #Predicate { $0.id == uuid })
+        guard let quickItem = try? sharedModelContainer.mainContext.fetch(descriptor).first else {
             print("hotkey called and there is no quick item in local, identifier: \(identifier)")
             return
         }
         
-        
+        Task {
+            await AIAgency.shared.run(quickItem: quickItem)
+        }
     }
 }
 
 extension Notification.Name {
     static let keyComboChanged = Notification.Name("keyComboChanged")
+}
+
+
+//
+extension QuickActionManager: RecordViewDelegate {
+    func recordViewShouldBeginRecording(_ recordView: KeyHolder.RecordView) -> Bool {
+        return true
+    }
+    
+    func recordView(_ recordView: KeyHolder.RecordView, canRecordKeyCombo keyCombo: Magnet.KeyCombo) -> Bool {
+        return true
+    }
+    
+    func recordView(_ recordView: KeyHolder.RecordView, didChangeKeyCombo keyCombo: Magnet.KeyCombo?) {
+        print("key combo changed")
+    }
+    
+    func recordViewDidEndRecording(_ recordView: KeyHolder.RecordView) {
+        print("end recording")
+    }
 }

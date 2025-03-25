@@ -11,8 +11,7 @@ import SwiftUI
 struct ServiceCardView: View {
     @State var aiService: AIService
     @Binding var selectedAIService: AIService?
-    
-    @State private var apiKey: String = ""
+    @State var apiKey: String
     
     var body: some View {
         VStack {
