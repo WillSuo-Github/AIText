@@ -16,7 +16,7 @@ struct QuickActionSettingView: View {
     var body: some View {
         List {
             ForEach(quickItems) { quickItem in
-                SettingCardView(quickItem: quickItem)
+                QuickActionCardView(quickItem: quickItem)
                         .listRowSeparator(.hidden)
             }
             

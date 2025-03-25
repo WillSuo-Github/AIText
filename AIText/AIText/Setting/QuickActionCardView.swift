@@ -1,5 +1,5 @@
 //
-//  SettingCardView.swift
+//  QuickActionCardView.swift
 //  AIText
 //
 //  Created by will Suo on 2025/3/24.
@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import KeyboardShortcuts
 
-struct SettingCardView: View {
+struct QuickActionCardView: View {
     @State var quickItem: QuickItem
     
     var body: some View {
@@ -75,7 +75,7 @@ struct SettingCardView: View {
 }
 
 #Preview {
-    SettingCardView(quickItem: QuickItem(title: "Test", prompt: "Test prompt"))
+    QuickActionCardView(quickItem: QuickItem(title: "Test", prompt: "Test prompt"))
 }
 
 

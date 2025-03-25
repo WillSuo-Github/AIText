@@ -11,8 +11,11 @@ import OpenAI
 final class OpenAIService {
     func run(quickItem: QuickItem) async throws -> String {
         let prompt = quickItem.prompt
+        guard let openAIKey = APIKeyManager.shared.getAPIKey(service: .openAI) else {
+            throw NSError(domain: "OpenAIService", code: 0, userInfo: [NSLocalizedDescriptionKey: "No OpenAI key"])
+        }
         
-        let openAI = OpenAI(apiToken: "")
+        let openAI = OpenAI(apiToken: openAIKey)
         let query = ChatQuery(messages: [
             .system(.init(content: prompt)),
             .user(.init(content: .string("")))
