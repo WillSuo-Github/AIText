@@ -27,16 +27,18 @@ struct SettingCardView: View {
                 RecordViewWrapper(keyComboData: $quickItem.keyComboData)
                     .frame(width: 200, height: 30)
                     .overlay(alignment: .trailing) {
-                        Button {
-                            clearShortcut()
-                        } label: {
-                            Image(systemName: "xmark.circle.fill")
-                                .foregroundColor(.gray)
+                        HStack {
+                            Button {
+                                clearShortcut()
+                            } label: {
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundColor(.gray)
+                            }
+                            .buttonStyle(.plain)
+                            
+                            Spacer().frame(width: 8)
                         }
-
-                    }
-                    .onChange(of: quickItem.keyComboData) { newValue in
-                            print("KeyCombo changed to: \(String(describing: newValue))")
+                        .opacity(quickItem.keyCombo != nil ? 1 : 0)
                     }
             }
             HStack {
