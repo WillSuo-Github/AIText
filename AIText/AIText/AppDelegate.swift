@@ -82,9 +82,8 @@ extension AppDelegate: NSMenuDelegate {
 extension AppDelegate {
     @objc func openPreferences() {
         settingsWindow.setFrame(NSRect(x: 0, y: 0, width: 800, height: 600), display: true)
-        settingsWindow.makeKeyAndOrderFront(nil)
+        NSApp.runModal(for: settingsWindow)
         settingsWindow.center()
-        NSApp.activate(ignoringOtherApps: true)
     }
     
     @objc func quitApp() {
@@ -95,7 +94,7 @@ extension AppDelegate {
 // MARK: - NSWindowDelegate
 extension AppDelegate: NSWindowDelegate {
     func windowWillClose(_ notification: Notification) {
-        NSApp.deactivate()
+        NSApp.stopModal()
     }
     
     func windowDidBecomeKey(_ notification: Notification) {
@@ -103,6 +102,6 @@ extension AppDelegate: NSWindowDelegate {
     }
     
     func windowDidResignKey(_ notification: Notification) {
-        print("窗口已失去焦点")
+        print("The window has lost focus.")
     }
 }

@@ -137,7 +137,9 @@ extension QuickActionManager: RecordViewDelegate {
     }
     
     func recordView(_ recordView: KeyHolder.RecordView, didChangeKeyCombo keyCombo: Magnet.KeyCombo?) {
-        print("key combo changed")
+        DispatchQueue.main.async {
+            self.refreshHotkeys()
+        }
     }
     
     func recordViewDidEndRecording(_ recordView: KeyHolder.RecordView) {
