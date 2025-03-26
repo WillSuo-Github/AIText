@@ -12,7 +12,7 @@ final class AIAgency {
     
     private var openAIService = OpenAIService()
     
-    func run(quickItem: QuickItem) async -> String {
+    func run(quickItem: QuickItem, selectionText: String) async -> String {
         NotificationCenter.default.post(name: .QuickActionStart, object: nil)
         
         guard quickItem.prompt.isEmpty == false else {
@@ -21,11 +21,10 @@ final class AIAgency {
         }
         
         do {
-            let result = try await openAIService.run(quickItem: quickItem)
-            NotificationCenter.default.post(name: .QuickActionSuccess, object: nil)
+            let result = try await openAIService.run(quickItem: quickItem, selectionText: selectionText)
             return result
         } catch {
-            print("Error: \(error)")
+            print("OpenAI service error: \(error)")
             NotificationCenter.default.post(name: .QuickActionError, object: nil)
             return ""
         }

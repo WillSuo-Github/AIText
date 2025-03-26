@@ -15,6 +15,10 @@ final class SelectionManager {
     private init() {}
 
     func getSelectedText() -> String? {
+        // 清空剪贴板，防止读取到旧数据
+        let clipboard = NSPasteboard.general
+        clipboard.clearContents()
+
         // 发送 Cmd + C 复制选中文本
         let src = CGEventSource(stateID: .hidSystemState)
         let cmdDown = CGEvent(keyboardEventSource: src, virtualKey: 0x38, keyDown: true) // Cmd 按下
@@ -33,8 +37,10 @@ final class SelectionManager {
         // 等待剪贴板更新（稍作延迟）
         usleep(100_000) // 100ms
 
-        // 从剪贴板读取文本
-        let clipboard = NSPasteboard.general
-        return clipboard.string(forType: .string)
+        // 获取剪贴板内容
+        let selectedText = clipboard.string(forType: .string)
+
+        // 如果剪贴板仍然为空，则返回 nil
+        return selectedText?.isEmpty == false ? selectedText : nil
     }
 }

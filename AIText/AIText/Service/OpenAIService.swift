@@ -9,10 +9,8 @@ import Foundation
 import OpenAI
 
 final class OpenAIService {
-    func run(quickItem: QuickItem) async throws -> String {
-        print("get user selection text: \(SelectionManager.shared.getSelectedText())")
-//        return ""
-        
+    func run(quickItem: QuickItem, selectionText: String) async throws -> String {
+        print("get user selection text: \(selectionText)")
         let prompt = quickItem.prompt
         guard let openAIKey = APIKeyManager.shared.getAPIKey(service: .openAI) else {
             throw NSError(domain: "OpenAIService", code: 0, userInfo: [NSLocalizedDescriptionKey: "No OpenAI key"])
@@ -21,15 +19,17 @@ final class OpenAIService {
         let openAI = OpenAI(apiToken: openAIKey)
         let query = ChatQuery(messages: [
             .system(.init(content: prompt)),
-            .user(.init(content: .string(SelectionManager.shared.getSelectedText() ?? "")))
-        ], model: .gpt4_o, n: 1)
+            .user(.init(content: .string(selectionText)))
+        ], model: .gpt3_5Turbo, n: 1)
         
         sleep(20)
         let chatResult: ChatResult = try await openAI.chats(query: query)
         
-        guard let result = chatResult.choices.first?.message.content else {
+        guard let result = chatResult.choices.first?.message.content?.string else {
             throw NSError(domain: "OpenAIService", code: 0, userInfo: [NSLocalizedDescriptionKey: "No result"])
         }
+        
+        print("get openai result: \(result)")
         return result
     }
 }

@@ -9,9 +9,11 @@ import Foundation
 import SwiftData
 import KeyHolder
 import Magnet
+import AppKit
 
 final class QuickActionManager: NSObject {
     static let shared = QuickActionManager()
+    private var lastWorkItem: DispatchWorkItem?
     
     @MainActor
     func start() {
@@ -55,19 +57,62 @@ final class QuickActionManager: NSObject {
 extension QuickActionManager {
     @MainActor
     @objc func hotkeyCalled(_ hotKey: HotKey) {
+        print("Hotkey called, identifier: \(hotKey.identifier)")
+        
+        if let lastWorkItem = lastWorkItem {
+            lastWorkItem.cancel()
+        }
+        
+        let workItem = DispatchWorkItem { [weak self] in
+            self?.executeHotkeyAction(hotKey)
+        }
+        
+        lastWorkItem = workItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: workItem)
+    }
+    
+    @MainActor
+    private func executeHotkeyAction(_ hotKey: HotKey) {
+        print("Executing last hotkey call, identifier: \(hotKey.identifier)")
+
         let identifier = hotKey.identifier
         guard let uuid = UUID(uuidString: identifier) else {
-            print("hotkey called and identifier is invalid, identifier: \(identifier)")
-            return
-        }
-        let descriptor = FetchDescriptor<QuickItem>(predicate: #Predicate { $0.id == uuid })
-        guard let quickItem = try? sharedModelContainer.mainContext.fetch(descriptor).first else {
-            print("hotkey called and there is no quick item in local, identifier: \(identifier)")
+            print("Invalid identifier: \(identifier)")
             return
         }
         
+        let descriptor = FetchDescriptor<QuickItem>(predicate: #Predicate { $0.id == uuid })
+        guard let quickItem = try? sharedModelContainer.mainContext.fetch(descriptor).first else {
+            print("No quick item found, identifier: \(identifier)")
+            return
+        }
+
+        guard let selectionText = SelectionManager.shared.getSelectedText() else {
+            print("No selected text")
+            return
+        }
+
         Task {
-            await AIAgency.shared.run(quickItem: quickItem)
+            let result = await AIAgency.shared.run(quickItem: quickItem, selectionText: selectionText)
+            // 将结果复制到剪贴板
+            let pasteboard = NSPasteboard.general
+            pasteboard.clearContents()
+            pasteboard.setString(result, forType: .string)
+
+            // 模拟 Cmd+V 粘贴操作
+            let eventSource = CGEventSource(stateID: .hidSystemState)
+            let cmdDown = CGEvent(keyboardEventSource: eventSource, virtualKey: 0x38, keyDown: true) // Cmd 按下
+            let vDown = CGEvent(keyboardEventSource: eventSource, virtualKey: 0x09, keyDown: true) // V 按下
+            let vUp = CGEvent(keyboardEventSource: eventSource, virtualKey: 0x09, keyDown: false) // V 松开
+            let cmdUp = CGEvent(keyboardEventSource: eventSource, virtualKey: 0x38, keyDown: false) // Cmd 松开
+
+            cmdDown?.flags = .maskCommand
+            vDown?.flags = .maskCommand
+
+            cmdDown?.post(tap: .cghidEventTap)
+            vDown?.post(tap: .cghidEventTap)
+            vUp?.post(tap: .cghidEventTap)
+            cmdUp?.post(tap: .cghidEventTap)
         }
     }
 }
