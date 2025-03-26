@@ -8,10 +8,13 @@
 import Cocoa
 
 class MouseLoadingWindowController: NSWindowController {
+    private lazy var animationViewController = AnimationViewController()
+    
     override func windowDidLoad() {
         super.windowDidLoad()
         
         window?.level = .screenSaver
         window?.backgroundColor = .clear
+        window?.contentViewController = animationViewController
     }
 }

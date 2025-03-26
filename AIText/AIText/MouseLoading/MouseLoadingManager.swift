@@ -18,27 +18,24 @@ class MouseLoadingManager: NSObject {
     
     private func startLoading() {
         if let screen = NSScreen.main {
-            let initialPosition = NSEvent.mouseLocation
-            mouseLoadingWindowController.window?.setFrameOrigin(initialPosition)
+            mouseLoadingWindowController.window?.setFrameOrigin(loadingPosition())
             mouseLoadingWindowController.showWindow(nil)
             
-            NSEvent.addGlobalMonitorForEvents(matching: .mouseMoved) { event in
-                var location = NSEvent.mouseLocation
-                location.x += 10
+            NSEvent.addGlobalMonitorForEvents(matching: [.mouseMoved, .leftMouseDragged]) { event in
                 DispatchQueue.main.async {
-                    self.mouseLoadingWindowController.window?.setFrameOrigin(location)
+                    self.mouseLoadingWindowController.window?.setFrameOrigin(self.loadingPosition())
                 }
             }
 
-            NSEvent.addLocalMonitorForEvents(matching: .mouseMoved) { event in
-                var location = NSEvent.mouseLocation
-                location.x += 10
-                DispatchQueue.main.async {
-                    self.mouseLoadingWindowController.window?.setFrameOrigin(location)
-                }
-                return event
-            }
         }
+    }
+    
+    private func loadingPosition() -> NSPoint {
+        let initialPosition = NSEvent.mouseLocation
+        var location = initialPosition
+        location.x += 10
+        location.y -= 35
+        return location
     }
     
     private func stopLoading() {
