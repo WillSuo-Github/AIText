@@ -22,6 +22,7 @@ final class AIAgency {
         
         do {
             let result = try await openAIService.run(quickItem: quickItem, selectionText: selectionText)
+            NotificationCenter.default.post(name: .QuickActionSuccess, object: nil)
             return result
         } catch {
             print("OpenAI service error: \(error)")

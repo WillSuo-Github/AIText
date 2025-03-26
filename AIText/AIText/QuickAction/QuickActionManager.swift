@@ -68,7 +68,11 @@ extension QuickActionManager {
         }
         
         lastWorkItem = workItem
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: workItem)
+        if hotKey.keyCombo.doubledModifiers && hotKey.keyCombo.keyEquivalentModifierMask.contains(.command) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: workItem)
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: workItem)
+        }
     }
     
     @MainActor

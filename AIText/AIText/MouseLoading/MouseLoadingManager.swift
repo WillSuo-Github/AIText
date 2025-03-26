@@ -17,16 +17,13 @@ class MouseLoadingManager: NSObject {
     }
     
     private func startLoading() {
-        if let screen = NSScreen.main {
-            mouseLoadingWindowController.window?.setFrameOrigin(loadingPosition())
-            mouseLoadingWindowController.showWindow(nil)
-            
-            NSEvent.addGlobalMonitorForEvents(matching: [.mouseMoved, .leftMouseDragged]) { event in
-                DispatchQueue.main.async {
-                    self.mouseLoadingWindowController.window?.setFrameOrigin(self.loadingPosition())
-                }
+        mouseLoadingWindowController.window?.setFrameOrigin(loadingPosition())
+        mouseLoadingWindowController.showWindow(nil)
+        
+        NSEvent.addGlobalMonitorForEvents(matching: [.mouseMoved, .leftMouseDragged]) { event in
+            DispatchQueue.main.async {
+                self.mouseLoadingWindowController.window?.setFrameOrigin(self.loadingPosition())
             }
-
         }
     }
     
@@ -38,14 +35,20 @@ class MouseLoadingManager: NSObject {
         return location
     }
     
-    private func stopLoading() {
+    private func stopLoadingWithSuccess() {
         mouseLoadingWindowController.close()
+    }
+    
+    private func stopLoadingWithError() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.mouseLoadingWindowController.close()
+        }
     }
     
     private func addObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleQuickActionStart), name: .QuickActionStart, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleQuickActionEnd), name: .QuickActionSuccess, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleQuickActionEnd), name: .QuickActionError, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleQuickActionSuccess), name: .QuickActionSuccess, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handQuickActionError), name: .QuickActionError, object: nil)
     }
     
     @objc private func handleQuickActionStart() {
@@ -54,9 +57,15 @@ class MouseLoadingManager: NSObject {
         }
     }
     
-    @objc private func handleQuickActionEnd() {
+    @objc private func handleQuickActionSuccess() {
         DispatchQueue.main.async {
-            self.stopLoading()
+            self.stopLoadingWithSuccess()
+        }
+    }
+    
+    @objc private func handQuickActionError() {
+        DispatchQueue.main.async {
+            self.stopLoadingWithError()
         }
     }
 }

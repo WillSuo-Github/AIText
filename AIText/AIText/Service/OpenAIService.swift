@@ -22,7 +22,6 @@ final class OpenAIService {
             .user(.init(content: .string(selectionText)))
         ], model: .gpt3_5Turbo, n: 1)
         
-        sleep(20)
         let chatResult: ChatResult = try await openAI.chats(query: query)
         
         guard let result = chatResult.choices.first?.message.content?.string else {
