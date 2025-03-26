@@ -20,7 +20,7 @@ final class SelectionManager {
         clipboard.clearContents()
 
         // 发送 Cmd + C 复制选中文本
-        let src = CGEventSource(stateID: .hidSystemState)
+        let src = CGEventSource(stateID: .privateState)
         let cmdDown = CGEvent(keyboardEventSource: src, virtualKey: 0x38, keyDown: true) // Cmd 按下
         let cmdUp = CGEvent(keyboardEventSource: src, virtualKey: 0x38, keyDown: false) // Cmd 松开
         let cDown = CGEvent(keyboardEventSource: src, virtualKey: 0x08, keyDown: true) // C 按下

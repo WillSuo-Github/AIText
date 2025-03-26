@@ -9,16 +9,14 @@ import Foundation
 import SwiftUI
 
 struct GeneralSettingView: View {
-    @State private var selectedAIService: AIService?
-    
     var body: some View {
         List {
             Section {
                 ForEach(AIService.allCases, id: \.self) { service in
-                    ServiceCardView(aiService: service, selectedAIService: $selectedAIService, apiKey: service.apiKey())
+                    ServiceCardView(aiService: service, selectedAIService: AIAgency.shared.$selectedAIService, apiKey: service.apiKey())
                 }
             } header: {
-                Text("Services")
+                Text("")
             }
         }
     }

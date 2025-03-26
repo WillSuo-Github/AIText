@@ -13,7 +13,6 @@ import AppKit
 
 final class QuickActionManager: NSObject {
     static let shared = QuickActionManager()
-    private var lastWorkItem: DispatchWorkItem?
     
     @MainActor
     func start() {
@@ -58,26 +57,12 @@ extension QuickActionManager {
     @MainActor
     @objc func hotkeyCalled(_ hotKey: HotKey) {
         print("Hotkey called, identifier: \(hotKey.identifier)")
-        
-        if let lastWorkItem = lastWorkItem {
-            lastWorkItem.cancel()
-        }
-        
-        let workItem = DispatchWorkItem { [weak self] in
-            self?.executeHotkeyAction(hotKey)
-        }
-        
-        lastWorkItem = workItem
-        if hotKey.keyCombo.doubledModifiers && hotKey.keyCombo.keyEquivalentModifierMask.contains(.command) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: workItem)
-        } else {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: workItem)
-        }
+        executeHotkeyAction(hotKey)
     }
     
     @MainActor
     private func executeHotkeyAction(_ hotKey: HotKey) {
-        print("Executing last hotkey call, identifier: \(hotKey.identifier)")
+        print("Executing last hotkey call, : \(hotKey.identifier)")
 
         let identifier = hotKey.identifier
         guard let uuid = UUID(uuidString: identifier) else {
@@ -104,7 +89,7 @@ extension QuickActionManager {
             pasteboard.setString(result, forType: .string)
 
             // 模拟 Cmd+V 粘贴操作
-            let eventSource = CGEventSource(stateID: .hidSystemState)
+            let eventSource = CGEventSource(stateID: .privateState)
             let cmdDown = CGEvent(keyboardEventSource: eventSource, virtualKey: 0x38, keyDown: true) // Cmd 按下
             let vDown = CGEvent(keyboardEventSource: eventSource, virtualKey: 0x09, keyDown: true) // V 按下
             let vUp = CGEvent(keyboardEventSource: eventSource, virtualKey: 0x09, keyDown: false) // V 松开

@@ -6,9 +6,13 @@
 //
 
 import Foundation
+import SwiftUI
 
 final class AIAgency {
     static let shared = AIAgency()
+    
+    @AppStorage("SelectedAiService")
+    var selectedAIService: AIService?
     
     private var openAIService = OpenAIService()
     
