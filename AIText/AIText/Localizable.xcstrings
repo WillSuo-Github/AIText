@@ -1,0 +1,45 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    "About" : {
+
+    },
+    "Add" : {
+
+    },
+    "Enter your prompt here..." : {
+
+    },
+    "Feedback" : {
+
+    },
+    "New Quick Action" : {
+
+    },
+    "Please select a menu item" : {
+
+    },
+    "Privacy Policy" : {
+
+    },
+    "Prompt" : {
+
+    },
+    "Send Email" : {
+
+    },
+    "Shortcut" : {
+
+    },
+    "Terms and Conditions" : {
+
+    },
+    "Version" : {
+
+    }
+  },
+  "version" : "1.0"
+}

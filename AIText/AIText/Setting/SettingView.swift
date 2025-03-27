@@ -20,7 +20,7 @@ struct SettingView: View {
             if let selectedMenu = selectedMenu {
                 selectedMenu.view
             } else {
-                Text("请选择一个设置项")
+                Text("Please select a menu item")
             }
         }
         .toolbar(.hidden, for: .automatic)

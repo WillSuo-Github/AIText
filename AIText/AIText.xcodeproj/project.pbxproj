@@ -207,6 +207,47 @@
 			knownRegions = (
 				en,
 				Base,
+				ca,
+				ar,
+				"zh-HK",
+				"zh-Hant",
+				"zh-Hans",
+				cs,
+				hr,
+				nl,
+				da,
+				"en-IN",
+				"en-AU",
+				vi,
+				uk,
+				th,
+				tr,
+				"es-419",
+				es,
+				sl,
+				sv,
+				sk,
+				"es-US",
+				ro,
+				pl,
+				"pt-BR",
+				"pt-PT",
+				ru,
+				ms,
+				nb,
+				ja,
+				it,
+				ko,
+				id,
+				hu,
+				hi,
+				he,
+				de,
+				fi,
+				"en-GB",
+				fr,
+				"fr-CA",
+				el,
 			);
 			mainGroup = 342C7D792D902BFE000054B3;
 			minimizedProjectReferenceProxies = 1;
@@ -348,6 +389,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -404,6 +446,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
 			name = Release;
 		};
