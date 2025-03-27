@@ -51,11 +51,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         if let button = statusItem?.button {
             button.title = ""
-            let hostingView = NSHostingView(rootView: Image(systemName: "globe"))
+            let hostingView = NSHostingView(rootView: MenuBarView())
             button.addSubview(hostingView)
             hostingView.snp.makeConstraints { make in
                 make.edges.equalToSuperview()
                 make.height.equalTo(18)
+                make.width.equalTo(30)
             }
             hostingView.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         }
