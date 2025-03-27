@@ -30,7 +30,7 @@ struct QuickActionSettingView: View {
     }
     
     private func addQuickItem() {
-        let quickItem = QuickItem(title: "Test", prompt: "Test prompt")
+        let quickItem = QuickItem(title: String(localized: "New Quick Action"), prompt: "")
         sharedModelContainer.mainContext.insert(quickItem)
         try? sharedModelContainer.mainContext.save()
     }

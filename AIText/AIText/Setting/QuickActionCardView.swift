@@ -60,15 +60,25 @@ struct QuickActionCardView: View {
                     HStack(alignment: .top) {
                         Text("Prompt")
                         Spacer().frame(width: 8)
-                        TextEditor(text: $quickItem.prompt)
-                            .frame(height: 100)
-                            .padding(4)
-                            .scrollContentBackground(.hidden)
-                            .background(Color.clear)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.gray.opacity(0.1), lineWidth: 1) // 圆角边框
-                            )
+                        ZStack(alignment: .topLeading) {
+                            TextEditor(text: $quickItem.prompt)
+                                .frame(height: 100)
+                                .padding(4)
+                                .scrollContentBackground(.hidden)
+                                .background(Color.clear)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke(Color.gray.opacity(0.1), lineWidth: 1) // 圆角边框
+                                )
+                            
+                            if quickItem.prompt.isEmpty {
+                                Text(String(localized: "Enter your prompt here..."))
+                                    .foregroundColor(.gray)
+                                    .padding(.top, 2)
+                                    .padding(.horizontal, 8)
+                                    .allowsHitTesting(false)
+                            }
+                        }
                     }
                 }
                 .padding(4)
@@ -90,7 +100,7 @@ struct QuickActionCardView: View {
 }
 
 #Preview {
-    QuickActionCardView(quickItem: QuickItem(title: "Test", prompt: "Test prompt"))
+    QuickActionCardView(quickItem: QuickItem(title: "Test", prompt: ""))
 }
 
 
