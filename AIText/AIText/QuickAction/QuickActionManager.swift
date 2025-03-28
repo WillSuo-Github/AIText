@@ -83,6 +83,8 @@ extension QuickActionManager {
 
         Task {
             let result = await AIAgency.shared.run(quickItem: quickItem, selectionText: selectionText)
+            guard result.isEmpty == false else { return }
+            
             // 将结果复制到剪贴板
             let pasteboard = NSPasteboard.general
             pasteboard.clearContents()

@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "" : {
-      "shouldTranslate" : false
-    },
     "About" : {
       "localizations" : {
         "ar" : {
@@ -1983,6 +1980,9 @@
           }
         }
       }
+    },
+    "Service" : {
+
     },
     "Shortcut" : {
       "localizations" : {

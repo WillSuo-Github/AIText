@@ -17,6 +17,10 @@ final class AIAgency {
     private var openAIService = OpenAIService()
     
     func run(quickItem: QuickItem, selectionText: String) async -> String {
+        guard let selectedAIService = selectedAIService else {
+            return ""
+        }
+        
         NotificationCenter.default.post(name: .QuickActionStart, object: nil)
         
         guard quickItem.prompt.isEmpty == false else {
@@ -25,7 +29,7 @@ final class AIAgency {
         }
         
         do {
-            let result = try await openAIService.run(quickItem: quickItem, selectionText: selectionText)
+            let result = try await selectedAIService.run(quickItem: quickItem, selectionText: selectionText)
             NotificationCenter.default.post(name: .QuickActionSuccess, object: nil)
             return result
         } catch {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		34258DAF2D964C3800FA67CE /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = 34258DAE2D964C3800FA67CE /* GoogleGenerativeAI */; };
 		342C7E352D902D2F000054B3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 342C7E342D902D2F000054B3 /* SnapKit */; };
 		348BEE722D92A9390049D682 /* KeyHolder in Frameworks */ = {isa = PBXBuildFile; productRef = 348BEE712D92A9390049D682 /* KeyHolder */; };
 		348BEE752D92AC190049D682 /* KeyHolder in Frameworks */ = {isa = PBXBuildFile; productRef = 348BEE742D92AC190049D682 /* KeyHolder */; };
@@ -59,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34258DAF2D964C3800FA67CE /* GoogleGenerativeAI in Frameworks */,
 				348BEE752D92AC190049D682 /* KeyHolder in Frameworks */,
 				348F725C2D9162E5007DD506 /* OpenAI in Frameworks */,
 				342C7E352D902D2F000054B3 /* SnapKit in Frameworks */,
@@ -127,6 +129,7 @@
 				348F725B2D9162E5007DD506 /* OpenAI */,
 				348BEE712D92A9390049D682 /* KeyHolder */,
 				348BEE742D92AC190049D682 /* KeyHolder */,
+				34258DAE2D964C3800FA67CE /* GoogleGenerativeAI */,
 			);
 			productName = AIText;
 			productReference = 342C7D822D902BFE000054B3 /* AIText.app */;
@@ -255,6 +258,7 @@
 				342C7E332D902D2F000054B3 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				348F725A2D9162E5007DD506 /* XCRemoteSwiftPackageReference "OpenAI" */,
 				348BEE732D92AC190049D682 /* XCRemoteSwiftPackageReference "KeyHolder" */,
+				34258DAD2D964C3800FA67CE /* XCRemoteSwiftPackageReference "generative-ai-swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 342C7D832D902BFE000054B3 /* Products */;
@@ -464,6 +468,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSAppleEventsUsageDescription = "";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -494,6 +499,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSAppleEventsUsageDescription = "";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -620,6 +626,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		34258DAD2D964C3800FA67CE /* XCRemoteSwiftPackageReference "generative-ai-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google-gemini/generative-ai-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.6;
+			};
+		};
 		342C7E332D902D2F000054B3 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -647,6 +661,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		34258DAE2D964C3800FA67CE /* GoogleGenerativeAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 34258DAD2D964C3800FA67CE /* XCRemoteSwiftPackageReference "generative-ai-swift" */;
+			productName = GoogleGenerativeAI;
+		};
 		342C7E342D902D2F000054B3 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 342C7E332D902D2F000054B3 /* XCRemoteSwiftPackageReference "SnapKit" */;

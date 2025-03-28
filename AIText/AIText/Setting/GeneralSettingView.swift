@@ -9,16 +9,27 @@ import Foundation
 import SwiftUI
 
 struct GeneralSettingView: View {
+    @State var selectedAIService: AIService? = AIAgency.shared.selectedAIService
+    
     var body: some View {
-        List {
+        ScrollView {
             Section {
-                ForEach(AIService.allCases, id: \.self) { service in
-                    ServiceCardView(aiService: service, selectedAIService: AIAgency.shared.$selectedAIService, apiKey: service.apiKey())
+                GroupBox {                
+                    ForEach(AIService.allCases, id: \.self) { service in
+                        ServiceCardView(aiService: service, selectedAIService: $selectedAIService, apiKey: service.apiKey() ?? "")
+                    }
                 }
             } header: {
-                Text("")
+                HStack {
+                    Text("Service")
+                    Spacer()
+                }
             }
         }
+        .onChange(of: selectedAIService, { oldValue, newValue in
+            AIAgency.shared.selectedAIService = newValue
+        })
+        .padding()
     }
 }
 
