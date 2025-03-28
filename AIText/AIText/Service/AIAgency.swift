@@ -33,7 +33,7 @@ final class AIAgency {
             NotificationCenter.default.post(name: .QuickActionSuccess, object: nil)
             return result
         } catch {
-            print("OpenAI service error: \(error)")
+            print("ai service error: \(error)")
             NotificationCenter.default.post(name: .QuickActionError, object: nil)
             return ""
         }

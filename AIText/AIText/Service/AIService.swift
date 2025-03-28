@@ -12,11 +12,13 @@ import GoogleGenerativeAI
 enum AIService: String, CaseIterable {
     case openAI
     case gemini
+    case deepSeek
     
     func displayName() -> String {
         switch self {
         case .openAI: return "OpenAI"
         case .gemini: return "Gemini"
+        case .deepSeek: return "DeepSeek"
         }
     }
     
@@ -24,6 +26,7 @@ enum AIService: String, CaseIterable {
         switch self {
         case .openAI: return "SK-*************************************************"
         case .gemini: return "*************************************************"
+        case .deepSeek: return "************************************************"
         }
     }
     
@@ -36,9 +39,12 @@ enum AIService: String, CaseIterable {
             throw NSError(domain: displayName(), code: 0, userInfo: [NSLocalizedDescriptionKey: "No api key"])
         }
         
+        print("get user selection text: \(selectionText)")
+        
         switch self {
         case .openAI: return try await openAIRun(quickItem: quickItem, selectionText: selectionText, apiKey: apiKey)
         case .gemini: return try await geminiRun(quickItem: quickItem, selectionText: selectionText, apiKey: apiKey)
+        case .deepSeek: return try await deepSeekRun(quickItem: quickItem, selectionText: selectionText, apiKey: apiKey)
         }
     }
 }
@@ -46,7 +52,6 @@ enum AIService: String, CaseIterable {
 // MARK: - OpenAI
 extension AIService {
     func openAIRun(quickItem: QuickItem, selectionText: String, apiKey: String) async throws -> String {
-        print("get user selection text: \(selectionText)")
         let prompt = quickItem.prompt
 
         
@@ -70,7 +75,6 @@ extension AIService {
 // MARK: - Gemini
 extension AIService {
     func geminiRun(quickItem: QuickItem, selectionText: String, apiKey: String) async throws -> String {
-        print("get user selection text: \(selectionText)")
         let prompt = quickItem.prompt
         
         let model = GenerativeModel(name: "gemini-1.5-flash-latest", apiKey: apiKey)
@@ -84,3 +88,26 @@ extension AIService {
         return result.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
+
+// MARK: - DeepSeek
+extension AIService {
+    func deepSeekRun(quickItem: QuickItem, selectionText: String, apiKey: String) async throws -> String {
+        let prompt = quickItem.prompt
+
+        let configration = OpenAI.Configuration(token: apiKey, host: "api.deepseek.com")
+        let openAI = OpenAI(configuration: configration)
+        let query = ChatQuery(messages: [
+            .system(.init(content: prompt)),
+            .user(.init(content: .string(selectionText)))
+        ], model: "deepseek-chat", n: 1)
+        
+        let chatResult: ChatResult = try await openAI.chats(query: query)
+        
+        guard let result = chatResult.choices.first?.message.content?.string else {
+            throw NSError(domain: "DeepSeekService", code: 0, userInfo: [NSLocalizedDescriptionKey: "No result"])
+        }
+        
+        print("get openai result: \(result)")
+        return result.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+}	
