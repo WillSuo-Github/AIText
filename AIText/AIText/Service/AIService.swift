@@ -63,7 +63,7 @@ extension AIService {
         }
         
         print("get openai result: \(result)")
-        return result
+        return result.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
 
@@ -81,6 +81,6 @@ extension AIService {
         }
         
         print("get gemini result: \(result)")
-        return result
+        return result.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
