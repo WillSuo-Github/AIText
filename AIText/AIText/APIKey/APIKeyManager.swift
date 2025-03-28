@@ -11,7 +11,7 @@ import Security
 final class APIKeyManager {
     static let shared = APIKeyManager()
 
-    private let keychainService = "com.yourapp.AIText" // 用你的应用标识符替换
+    private let keychainService = "com.ws.AIText" // 用你的应用标识符替换
 
     // 获取 API 密钥
     func getAPIKey(service: AIService) -> String? {
