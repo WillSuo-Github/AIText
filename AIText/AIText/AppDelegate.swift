@@ -27,6 +27,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return result
     }()
     
+    private var popWindowController: PopWindowController?
+    
     private lazy var menu: NSMenu = {
         let menu = NSMenu()
         menu.delegate = self
