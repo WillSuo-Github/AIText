@@ -63,7 +63,7 @@ extension AIService {
         
         let chatResult: ChatResult = try await openAI.chats(query: query)
         
-        guard let result = chatResult.choices.first?.message.content?.string else {
+        guard let result = chatResult.choices.first?.message.content else {
             throw NSError(domain: "OpenAIService", code: 0, userInfo: [NSLocalizedDescriptionKey: "No result"])
         }
         
@@ -103,7 +103,7 @@ extension AIService {
         
         let chatResult: ChatResult = try await openAI.chats(query: query)
         
-        guard let result = chatResult.choices.first?.message.content?.string else {
+        guard let result = chatResult.choices.first?.message.content else {
             throw NSError(domain: "DeepSeekService", code: 0, userInfo: [NSLocalizedDescriptionKey: "No result"])
         }
         

@@ -14,8 +14,6 @@ final class AIAgency {
     @AppStorage("SelectedAiService")
     var selectedAIService: AIService?
     
-    private var openAIService = OpenAIService()
-    
     func run(quickItem: QuickItem, selectionText: String) async -> String {
         guard let selectedAIService = selectedAIService else {
             return ""
