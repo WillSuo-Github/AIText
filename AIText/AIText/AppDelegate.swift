@@ -53,7 +53,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         if let button = statusItem?.button {
             button.title = ""
-            let hostingView = NSHostingView(rootView: MenuBarView())
+            let hostingView = MenuBarView()
             button.addSubview(hostingView)
             hostingView.snp.makeConstraints { make in
                 make.edges.equalToSuperview()
