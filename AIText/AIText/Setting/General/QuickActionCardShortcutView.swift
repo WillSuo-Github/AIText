@@ -8,7 +8,6 @@
 import SwiftUI
 import Magnet
 
-// MARK: - Shortcut Subview
 struct QuickActionCardShortcutView: View {
     @Binding var keyComboData: Data?
     var keyCombo: KeyCombo?
@@ -24,8 +23,8 @@ struct QuickActionCardShortcutView: View {
             Spacer()
             
             // Placeholder for RecordViewWrapper
-            KeyComboRecordView(keyComboData: $keyComboData)
-                .frame(width: 200, height: 34)
+            RecordViewWrapper(keyComboData: $keyComboData)
+                .frame(height: 34)
                 .background(
                     RoundedRectangle(cornerRadius: 8)
                         .fill(colorScheme == .dark ? Color.black.opacity(0.2) : Color.white)

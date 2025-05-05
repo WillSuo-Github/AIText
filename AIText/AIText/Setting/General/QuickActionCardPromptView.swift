@@ -1,5 +1,5 @@
 //
-//  PromptView.swift
+//  QuickActionCardPromptView.swift
 //  AIText
 //
 //  Created by will Suo on 2025/5/5.

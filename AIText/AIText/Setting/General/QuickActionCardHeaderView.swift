@@ -1,5 +1,5 @@
 //
-//  HeaderView.swift
+//  QuickActionCardHeaderView.swift
 //  AIText
 //
 //  Created by will Suo on 2025/5/5.
@@ -18,7 +18,6 @@ struct QuickActionCardHeaderView: View {
             }
             .font(.headline)
             .textFieldStyle(.plain)
-            .padding(.vertical, 4)
             
             Spacer()
             
@@ -32,6 +31,5 @@ struct QuickActionCardHeaderView: View {
             .buttonStyle(.plain)
             .contentShape(Rectangle())
         }
-        .padding(.horizontal, 12)
     }
 }
