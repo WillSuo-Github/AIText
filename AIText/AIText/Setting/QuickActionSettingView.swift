@@ -37,6 +37,7 @@ struct QuickActionSettingView: View {
                     QuickActionCardView(quickItem: quickItem)
                         .listRowSeparator(.hidden)
                 }
+                .onDelete(perform: deleteQuickItems)
             }
             
             HStack(alignment: .center) {
@@ -65,6 +66,15 @@ struct QuickActionSettingView: View {
         let quickItem = QuickItem(title: String(localized: "New Quick Action"), prompt: "")
         sharedModelContainer.mainContext.insert(quickItem)
         try? sharedModelContainer.mainContext.save()
+    }
+    
+    private func deleteQuickItems(at offsets: IndexSet) {
+        for index in offsets {
+            let item = quickItems[index]
+            sharedModelContainer.mainContext.delete(item)
+        }
+        try? sharedModelContainer.mainContext.save()
+        NotificationCenter.default.post(name: .quickItemsChanged, object: nil)
     }
 }
 

@@ -48,6 +48,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         QuickActionManager.shared.start()
         MouseLoadingManager.shared.start()
+        ContextMenuManager.shared.start()
+        AITextContextService.shared.registerServices()
         
         // Create menu bar icon
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)

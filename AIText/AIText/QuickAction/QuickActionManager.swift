@@ -50,6 +50,33 @@ final class QuickActionManager: NSObject {
             print("register hotkey, identifier: \(item.id.uuidString)")
         }
     }
+    
+    func executeQuickItemAction(_ item: QuickItem, selectionText: String) {
+        Task {
+            let result = await AIAgency.shared.run(quickItem: item, selectionText: selectionText)
+            guard result.isEmpty == false else { return }
+            
+            // Copy result to clipboard
+            let pasteboard = NSPasteboard.general
+            pasteboard.clearContents()
+            pasteboard.setString(result, forType: .string)
+
+            // Simulate Cmd+V paste operation
+            let eventSource = CGEventSource(stateID: .privateState)
+            let cmdDown = CGEvent(keyboardEventSource: eventSource, virtualKey: 0x38, keyDown: true) // Cmd press
+            let vDown = CGEvent(keyboardEventSource: eventSource, virtualKey: 0x09, keyDown: true) // V press
+            let vUp = CGEvent(keyboardEventSource: eventSource, virtualKey: 0x09, keyDown: false) // V release
+            let cmdUp = CGEvent(keyboardEventSource: eventSource, virtualKey: 0x38, keyDown: false) // Cmd release
+
+            cmdDown?.flags = .maskCommand
+            vDown?.flags = .maskCommand
+
+            cmdDown?.post(tap: .cghidEventTap)
+            vDown?.post(tap: .cghidEventTap)
+            vUp?.post(tap: .cghidEventTap)
+            cmdUp?.post(tap: .cghidEventTap)
+        }
+    }
 }
 
 // MARK: - Hotkey Action
@@ -76,35 +103,12 @@ extension QuickActionManager {
             return
         }
 
-        guard let selectionText = SelectionManager.shared.getSelectedText() else {
+        guard let selectionText = SelectionManager.shared.getSelectedText(), !selectionText.isEmpty else {
             print("No selected text")
             return
         }
 
-        Task {
-            let result = await AIAgency.shared.run(quickItem: quickItem, selectionText: selectionText)
-            guard result.isEmpty == false else { return }
-            
-            // Copy result to clipboard
-            let pasteboard = NSPasteboard.general
-            pasteboard.clearContents()
-            pasteboard.setString(result, forType: .string)
-
-            // Simulate Cmd+V paste operation
-            let eventSource = CGEventSource(stateID: .privateState)
-            let cmdDown = CGEvent(keyboardEventSource: eventSource, virtualKey: 0x38, keyDown: true) // Cmd press
-            let vDown = CGEvent(keyboardEventSource: eventSource, virtualKey: 0x09, keyDown: true) // V press
-            let vUp = CGEvent(keyboardEventSource: eventSource, virtualKey: 0x09, keyDown: false) // V release
-            let cmdUp = CGEvent(keyboardEventSource: eventSource, virtualKey: 0x38, keyDown: false) // Cmd release
-
-            cmdDown?.flags = .maskCommand
-            vDown?.flags = .maskCommand
-
-            cmdDown?.post(tap: .cghidEventTap)
-            vDown?.post(tap: .cghidEventTap)
-            vUp?.post(tap: .cghidEventTap)
-            cmdUp?.post(tap: .cghidEventTap)
-        }
+        executeQuickItemAction(quickItem, selectionText: selectionText)
     }
 }
 
