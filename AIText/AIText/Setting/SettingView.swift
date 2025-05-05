@@ -24,6 +24,7 @@ struct SettingView: View {
             }
         }
         .toolbar(.hidden, for: .automatic)
+        .frame(minWidth: 500, minHeight: 400)
     }
 }
 
