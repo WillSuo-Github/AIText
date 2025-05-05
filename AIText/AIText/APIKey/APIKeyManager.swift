@@ -11,20 +11,17 @@ import Security
 final class APIKeyManager {
     static let shared = APIKeyManager()
 
-    private let keychainService = "com.ws.AIText" // 用你的应用标识符替换
+    private let keychainService = "com.ws.AIText"
 
-    // 获取 API 密钥
     func getAPIKey(service: AIService) -> String? {
         guard let data = load(service: service) else { return nil }
         return String(data: data, encoding: .utf8)
     }
 
-    // 保存 API 密钥
     func saveAPIKey(service: AIService, key: String) {
         save(service: service, key: key)
     }
 
-    // 从 Keychain 加载数据
     private func load(service: AIService) -> Data? {
         let query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
@@ -44,9 +41,7 @@ final class APIKeyManager {
         }
     }
 
-    // 将数据保存到 Keychain
     private func save(service: AIService, key: String) {
-        // 删除旧的 key
         delete(service: service)
 
         let data = key.data(using: .utf8)!
@@ -65,7 +60,6 @@ final class APIKeyManager {
         }
     }
 
-    // 删除 Keychain 中的密钥
     private func delete(service: AIService) {
         let query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,

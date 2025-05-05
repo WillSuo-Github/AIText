@@ -73,7 +73,6 @@ class BallScaleMultipleAnimationView: NSView {
     }
 }
 
-// 创建一个 NSViewController 以显示动画视图
 class AnimationViewController: NSViewController {
     override func loadView() {
         self.view = BallScaleMultipleAnimationView(frame: NSRect(x: 0, y: 0, width: 40, height: 40))

@@ -40,7 +40,6 @@ struct RecordViewWrapper: NSViewRepresentable {
         if newKey == nil {
             nsView.clear()
         }
-//        nsView.layoutSubtreeIfNeeded()
     }
     
     func makeCoordinator() -> Coordinator {

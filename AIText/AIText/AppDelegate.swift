@@ -37,19 +37,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         preferencesItem.target = self
         menu.addItem(preferencesItem)
         
-        menu.addItem(NSMenuItem.separator()) // 分隔符
+        menu.addItem(NSMenuItem.separator()) // separator
         menu.addItem(NSMenuItem(title: "Quit", action: #selector(quitApp), keyEquivalent: "q"))
         
         return menu
     }()
     
     func applicationDidFinishLaunching(_ notification: Notification) {
-        print("✅ AppDelegate 启动成功")
+        print("✅ AppDelegate started successfully")
 
         QuickActionManager.shared.start()
         MouseLoadingManager.shared.start()
         
-        // 创建菜单栏图标
+        // Create menu bar icon
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         if let button = statusItem?.button {
             button.title = ""
@@ -63,7 +63,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             hostingView.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         }
         
-        // 配置菜单
+        // Configure menu
         statusItem?.menu = menu
     }
     
@@ -71,13 +71,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 extension AppDelegate: NSMenuDelegate {
     func menuWillOpen(_ menu: NSMenu) {
-        // 在菜单打开时执行的操作
-        print("菜单将要打开")
+        // Actions when menu opens
+        print("Menu will open")
     }
     
     func menuDidClose(_ menu: NSMenu) {
-        // 在菜单关闭时执行的操作
-        print("菜单已关闭")
+        // Actions when menu closes
+        print("Menu closed")
     }
 }
 
@@ -101,7 +101,7 @@ extension AppDelegate: NSWindowDelegate {
     }
     
     func windowDidBecomeKey(_ notification: Notification) {
-        print("窗口已激活")
+        print("Window activated")
     }
     
     func windowDidResignKey(_ notification: Notification) {

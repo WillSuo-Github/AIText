@@ -85,17 +85,17 @@ extension QuickActionManager {
             let result = await AIAgency.shared.run(quickItem: quickItem, selectionText: selectionText)
             guard result.isEmpty == false else { return }
             
-            // 将结果复制到剪贴板
+            // Copy result to clipboard
             let pasteboard = NSPasteboard.general
             pasteboard.clearContents()
             pasteboard.setString(result, forType: .string)
 
-            // 模拟 Cmd+V 粘贴操作
+            // Simulate Cmd+V paste operation
             let eventSource = CGEventSource(stateID: .privateState)
-            let cmdDown = CGEvent(keyboardEventSource: eventSource, virtualKey: 0x38, keyDown: true) // Cmd 按下
-            let vDown = CGEvent(keyboardEventSource: eventSource, virtualKey: 0x09, keyDown: true) // V 按下
-            let vUp = CGEvent(keyboardEventSource: eventSource, virtualKey: 0x09, keyDown: false) // V 松开
-            let cmdUp = CGEvent(keyboardEventSource: eventSource, virtualKey: 0x38, keyDown: false) // Cmd 松开
+            let cmdDown = CGEvent(keyboardEventSource: eventSource, virtualKey: 0x38, keyDown: true) // Cmd press
+            let vDown = CGEvent(keyboardEventSource: eventSource, virtualKey: 0x09, keyDown: true) // V press
+            let vUp = CGEvent(keyboardEventSource: eventSource, virtualKey: 0x09, keyDown: false) // V release
+            let cmdUp = CGEvent(keyboardEventSource: eventSource, virtualKey: 0x38, keyDown: false) // Cmd release
 
             cmdDown?.flags = .maskCommand
             vDown?.flags = .maskCommand
@@ -112,8 +112,7 @@ extension Notification.Name {
     static let keyComboChanged = Notification.Name("keyComboChanged")
 }
 
-
-//
+// MARK: - RecordViewDelegate
 extension QuickActionManager: RecordViewDelegate {
     func recordViewShouldBeginRecording(_ recordView: KeyHolder.RecordView) -> Bool {
         return true
