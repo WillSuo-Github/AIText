@@ -70,6 +70,8 @@ struct AboutSettingView: View {
                 }
             }
         }
+        .listStyle(.plain)
+        .scrollContentBackground(.hidden)
     }
 }
 
